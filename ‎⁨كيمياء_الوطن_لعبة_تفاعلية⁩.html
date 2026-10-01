@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>كيمياء الوطن.. علمٌ يبني مستقبلنا</title>
+<style>
+:root{--g:#0b7a4b;--g2:#075f3a;--bg:#f4faf7;--card:#fff;--text:#17332a;--muted:#61766e;--line:#d8e8e0;--gold:#c89b3c}
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:linear-gradient(180deg,#edf8f2,#fff);color:var(--text)}
+.wrap{max-width:780px;margin:auto;padding:22px}.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 12px 35px #0b7a4b14}
+.center{text-align:center}.hidden{display:none}.flag{font-size:55px}.tag{color:var(--g);font-weight:700}.muted{color:var(--muted)}
+h1{font-size:30px;margin:8px 0}h2{font-size:25px}.input,textarea{width:100%;font:inherit;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fbfdfc;outline:none}
+.input:focus,textarea:focus{border-color:var(--g)}button{font:inherit;cursor:pointer;border:0}.primary{width:100%;padding:14px;border-radius:14px;background:var(--g);color:white;font-weight:700;margin-top:12px}.primary:hover{background:var(--g2)}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.pill{padding:8px 12px;border:1px solid var(--line);border-radius:99px;background:#fff}
+.bar{height:9px;background:#e7f0eb;border-radius:20px;overflow:hidden;margin-bottom:18px}.bar>div{height:100%;background:var(--g);transition:.3s}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{min-height:58px;padding:13px;border:1px solid var(--line);border-radius:14px;background:#f9fcfa;text-align:right;color:var(--text)}.choice:disabled{cursor:default}.correct{border-color:var(--g);background:#e8f7ef}.wrong{border-color:#b84949;background:#fff0f0}
+.feedback{margin-top:14px;padding:14px;border-radius:14px;background:#f2f8f5;border:1px solid var(--line);line-height:1.8}.cert{border:3px double var(--gold);padding:28px;border-radius:20px;background:linear-gradient(135deg,#fff,#fbfff9);margin:22px 0}.cert h2{color:var(--g)}.signs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:25px;padding-top:18px;border-top:1px solid var(--line)}
+.confetti{font-size:26px;letter-spacing:5px}.error{color:#a53636;min-height:22px;margin:6px 0}
+@media(max-width:560px){.wrap{padding:12px}.card{padding:19px}.choices{grid-template-columns:1fr}h1{font-size:25px}.signs{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+@media print{body{background:white}.no-print{display:none!important}.wrap{max-width:none;padding:0}.card{box-shadow:none;border:0}.cert{margin:0}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section id="start" class="card center">
+<div class="flag">🇸🇦 🧪</div>
+<div class="tag">اليوم الوطني السعودي × الكيمياء</div>
+<h1>كيمياء الوطن.. علمٌ يبني مستقبلنا</h1>
+<p class="muted">اكتشفي كيف تسهم الكيمياء في طاقة وطننا ومياهه وصناعته وبيئته.</p>
+<form id="startForm">
+<label for="student"><b>اسم الطالبة</b></label>
+<input id="student" class="input" maxlength="50" placeholder="اكتبي اسمك هنا" autocomplete="name">
+<div id="err" class="error"></div>
+<button class="primary">ابدئي التحدي 🇸🇦</button>
+</form>
+</section>
+
+<section id="quiz" class="hidden">
+<div class="top"><div><b id="welcome"></b><div class="muted">كيميائية الوطن 🧪</div></div><div><span class="pill">⭐ <b id="score">0</b></span> <span class="pill" id="counter"></span></div></div>
+<div class="bar"><div id="progress"></div></div>
+<div class="card center">
+<div id="icon" class="flag">⚗️</div><div id="topic" class="tag"></div><h2 id="question"></h2>
+<div id="choices" class="choices"></div>
+<div id="feedback" class="feedback hidden"></div>
+<button id="next" class="primary hidden" type="button">السؤال التالي ←</button>
+</div>
+</section>
+
+<section id="reflection" class="card center hidden">
+<div class="flag">🇸🇦🧪</div><div class="tag">التحدي الختامي</div>
+<h2>أنا كطالبة كيمياء، كيف أستطيع أن أخدم وطني بالعلم؟</h2>
+<textarea id="reflectionText" rows="4" maxlength="250" placeholder="اكتبي فكرتك هنا..."></textarea>
+<div id="reflectErr" class="error"></div>
+<button id="finishBtn" class="primary" type="button">أكملتُ التحدي 💚</button>
+</section>
+
+<section id="finish" class="card center hidden">
+<div class="confetti">🇸🇦 ✨ 🧪 ✨ 🇸🇦</div>
+<h2>بعلمكِ وإبداعكِ يزدهر وطننا 🇸🇦💚</h2>
+<p>نتيجتكِ: <b><span id="finalScore"></span> / 9</b></p>
+<div class="cert">
+<div class="flag">🏅🇸🇦</div><h2>شهادة شكر وتقدير</h2>
+<p>تُقدم للطالبة:</p><h2 id="certName"></h2>
+<p>تقديرًا لمشاركتها المتميزة في تحدي<br><b>«كيمياء الوطن.. علمٌ يبني مستقبلنا»</b></p>
+<p>وإبداعها في ربط علم الكيمياء بوطنها،<br>سائلين الله أن يديم على وطننا الأمن والعز والازدهار.</p>
+<div class="signs"><div>المعلمة<br><b>رندا اليوبي</b></div><div>مديرة المدرسة<br><b>هنادي مشرف</b></div></div>
+<p><b>الثانوية الأولى بالعاقول</b></p><p class="tag">«كيمياؤنا علم.. ووطننا فخر 🇸🇦»</p>
+</div>
+<div class="no-print"><button id="printBtn" class="primary" type="button">طباعة / حفظ الشهادة PDF 🏅</button><button id="restart" class="primary" type="button">إعادة التحدي ↻</button></div>
+</section>
+</main>
+<script>
+const data=[
+["تقنية الوطن","💻⚛️","ما العنصر الكيميائي الذي يدخل بصورة أساسية في صناعة رقائق الحاسب والخلايا الشمسية؟",["السيليكون Si","الصوديوم Na","الكلور Cl","الحديد Fe"],0,"السيليكون من أشباه الموصلات المهمة في الإلكترونيات والخلايا الشمسية."],
+["ثروات الوطن","🛢️🧪","النفط مورد مهم في المملكة، ويتكون بصورة أساسية من:",["الهيدروكربونات","الأملاح","المعادن","الأكاسيد"],0,"النفط خليط معقد يتكون بصورة رئيسية من مركبات هيدروكربونية."],
+["كيمياء النفط","⚗️🛢️","أي فرع من الكيمياء يرتبط بدراسة المركبات الكربونية ومنها كثير من مكونات النفط ومشتقاته؟",["الكيمياء العضوية","الكيمياء النووية","الكيمياء الفلكية","الكيمياء الجيولوجية"],0,"الكيمياء العضوية تدرس مركبات الكربون، ومنها كثير من مركبات النفط."],
+["مياه الوطن","💧🔬","تحلية مياه البحر في المملكة مثال على توظيف العلوم للمساهمة في:",["توفير المياه العذبة","زيادة ملوحة الماء","إنتاج النفط","تكوين المعادن"],0,"تهدف التحلية إلى إزالة الأملاح ومكونات أخرى من مياه البحر لإنتاج مياه مناسبة للاستخدام."],
+["بيئة الوطن","🌱🌍","ما الغاز الذي تستهدف كثير من التقنيات خفض انبعاثاته للمساعدة في الحد من تغير المناخ؟",["ثاني أكسيد الكربون CO₂","الأكسجين O₂","الهيليوم He","النيون Ne"],0,"ثاني أكسيد الكربون من غازات الدفيئة، لذا تستهدف تقنيات عديدة خفض انبعاثاته أو التقاطه."],
+["طاقة المستقبل","☀️⚡","استخدام الطاقة الشمسية يرتبط بالاستفادة من:",["ضوء الشمس وتحويل الطاقة","ملوحة البحر","احتراق الحديد","تجمد الماء"],0,"يمكن تحويل طاقة الضوء إلى كهرباء باستخدام الخلايا الكهروضوئية."],
+["صناعة الوطن","💊🧪","صناعة الأدوية والأسمدة والمواد المتقدمة تعتمد بصورة كبيرة على:",["علم الكيمياء","علم الفلك فقط","الجغرافيا فقط","علم الآثار"],0,"الكيمياء أساسية في تصميم المواد وتحليلها وتصنيع كثير من المنتجات."],
+["وطن مستدام","♻️🇸🇦","إعادة تدوير المواد تساعد وطننا على:",["تقليل النفايات والمحافظة على الموارد والبيئة","زيادة النفايات","هدر الموارد","زيادة استهلاك المواد دائمًا"],0,"إعادة التدوير تساعد على تقليل النفايات والمحافظة على الموارد."],
+["مستقبل الوطن","🚀🇸🇦","كيف يمكن للكيمياء أن تسهم في مستقبل المملكة؟",["تطوير الطاقة والصناعة والمياه والدواء والمواد المستدامة","دراسة الشعر فقط","زيادة هدر الموارد","منع التقنيات الحديثة"],0,"تطبيقات الكيمياء تمتد إلى الطاقة والمياه والدواء والصناعة والمواد المستدامة."]
+];
+let i=0,score=0,name="";
+const $=s=>document.querySelector(s);
+function show(id){["#start","#quiz","#reflection","#finish"].forEach(x=>$(x).classList.add("hidden"));$(id).classList.remove("hidden");scrollTo({top:0,behavior:"smooth"})}
+function render(){let d=data[i];$("#icon").textContent=d[1];$("#topic").textContent=d[0];$("#question").textContent=d[2];$("#counter").textContent=(i+1)+" / "+data.length;$("#progress").style.width=((i+1)/data.length*100)+"%";$("#feedback").classList.add("hidden");$("#next").classList.add("hidden");let box=$("#choices");box.innerHTML="";d[3].forEach((v,n)=>{let b=document.createElement("button");b.type="button";b.className="choice";b.textContent=v;b.addEventListener("click",()=>pick(n,b));box.appendChild(b)})}
+function pick(n,b){let d=data[i],bs=[...document.querySelectorAll(".choice")];bs.forEach(x=>x.disabled=true);let ok=n===d[4];if(ok){score++;b.classList.add("correct");b.textContent="✓ "+b.textContent}else{b.classList.add("wrong");b.textContent="✗ "+b.textContent;bs[d[4]].classList.add("correct");bs[d[4]].textContent="✓ "+bs[d[4]].textContent}$("#score").textContent=score;$("#feedback").innerHTML="<b>"+(ok?"أحسنتِ 🇸🇦 إجابة صحيحة.. بعلمنا نبني وطننا 💚":"الإجابة الصحيحة موضحة أعلاه 💡")+"</b><br>"+d[5];$("#feedback").classList.remove("hidden");$("#next").classList.remove("hidden");$("#next").textContent=i===data.length-1?"التحدي الختامي 🇸🇦":"السؤال التالي ←"}
+$("#startForm").addEventListener("submit",e=>{e.preventDefault();name=$("#student").value.trim().replace(/\s+/g," ");if(name.length<2){$("#err").textContent="اكتبي اسم الطالبة للبدء.";return}$("#err").textContent="";i=0;score=0;$("#score").textContent=0;$("#welcome").textContent="أهلًا "+name+" 👋";show("#quiz");render()});
+$("#next").addEventListener("click",()=>{if(i<data.length-1){i++;render()}else show("#reflection")});
+$("#finishBtn").addEventListener("click",()=>{if($("#reflectionText").value.trim().length<3){$("#reflectErr").textContent="اكتبي فكرة قصيرة عن دورك في خدمة الوطن بالعلم.";return}$("#reflectErr").textContent="";$("#certName").textContent=name;$("#finalScore").textContent=score;show("#finish")});
+$("#restart").addEventListener("click",()=>{i=0;score=0;name="";$("#student").value="";$("#reflectionText").value="";show("#start")});
+$("#printBtn").addEventListener("click",()=>window.print());
+</script>
+</body>
+</html>
